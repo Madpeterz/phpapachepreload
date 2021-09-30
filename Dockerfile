@@ -7,7 +7,6 @@ RUN \
     apt-get update \
     && apt-get install -y openssl \
     && apt-get install -y cron \
-    && apt-get install -y composer \
     && echo 'Installing PHP curl extension' \
     && apt-get install -y --no-install-recommends libssl-dev libcurl4-openssl-dev \
     && docker-php-ext-configure curl --with-curl \
