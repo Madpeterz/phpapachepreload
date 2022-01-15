@@ -7,7 +7,15 @@ RUN \
     apt-get update \
     && apt-get install -y openssl \
     && apt-get install -y cron \
-    && echo 'Installing PHP curl extension' \
+    && echo 'Installing png lib' \
+    && apt-get install -y libpng-dev \
+    && echo 'Installing zip support' \
+    && apt-get install -y zlib1g-dev \
+    && apt-get install -y libzip-dev \
+    && apt-get install -y unzip \
+    && echo 'Adding font support' \
+    && apt-get install -y libfreetype6-dev \
+    && echo 'Installing PHP extensions' \
     && apt-get install -y --no-install-recommends libssl-dev libcurl4-openssl-dev \
     && docker-php-ext-configure curl --with-curl \
     && docker-php-ext-install -j$(nproc) \
@@ -15,6 +23,9 @@ RUN \
         mysqli \
         calendar \
         opcache \
+        zip \
+        mbstring \
+        gd \
     && a2enmod rewrite \ 
     && a2enmod expires \
     && apt-get update
