@@ -13,9 +13,11 @@ RUN \
     && apt-get install -y zlib1g-dev \
     && apt-get install -y libzip-dev \
     && apt-get install -y unzip \
+    && echo 'Installing zip support' \
     && echo 'Adding font support' \
     && apt-get install -y libfreetype6-dev \
-    && echo 'Installing PHP extensions' \
+    && echo 'oniguruma?' \
+    && apt-get install -y libonig-dev \
     && apt-get install -y --no-install-recommends libssl-dev libcurl4-openssl-dev \
     && docker-php-ext-configure curl --with-curl \
     && docker-php-ext-install -j$(nproc) \
