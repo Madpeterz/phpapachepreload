@@ -14,7 +14,6 @@ RUN \
     && apt-get install -y libzip-dev \
     && apt-get install -y unzip \
     && echo 'Installing image magic' \
-    && apt-get install -y build-essential \
     && apt-get install -y libmagickwand-dev \
     && echo 'Installing zip support' \
     && echo 'Adding font support' \
