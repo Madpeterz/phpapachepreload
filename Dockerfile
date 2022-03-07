@@ -13,10 +13,15 @@ RUN \
     && apt-get install -y zlib1g-dev \
     && apt-get install -y libzip-dev \
     && apt-get install -y unzip \
-    && echo 'Installing image magic' \
-    && apt-get install -y libmagickwand-dev \
-    && echo 'Installing zip support' \
-    && echo 'Adding font support' \
+
+RUN \
+    echo 'Installing imageMagic' \
+    && apt-get update && apt-get install -y libmagickwand-dev --no-install-recommends \
+    && pecl install imagick \
+	&& docker-php-ext-enable imagick
+
+RUN \
+    echo 'Adding font support' \
     && apt-get install -y libfreetype6-dev \
     && echo 'oniguruma?' \
     && apt-get install -y libonig-dev \
@@ -30,7 +35,6 @@ RUN \
         zip \
         mbstring \
         gd \
-        imagick \
     && a2enmod rewrite \ 
     && a2enmod expires \
     && apt-get update
