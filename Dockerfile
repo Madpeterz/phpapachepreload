@@ -13,6 +13,9 @@ RUN \
     && apt-get install -y zlib1g-dev \
     && apt-get install -y libzip-dev \
     && apt-get install -y unzip \
+    && echo 'Installing image magic' \
+    && apt-get install -y build-essential \
+    && apt-get install -y libmagickwand-dev \
     && echo 'Installing zip support' \
     && echo 'Adding font support' \
     && apt-get install -y libfreetype6-dev \
@@ -28,6 +31,7 @@ RUN \
         zip \
         mbstring \
         gd \
+        imagick \
     && a2enmod rewrite \ 
     && a2enmod expires \
     && apt-get update
