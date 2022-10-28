@@ -5,20 +5,18 @@ MAINTAINER Madpeter
 # Install necessary packages / Install PHP extensions which depend on external libraries
 RUN \
     apt-get update \
+    && echo 'adding SSL + cron + imagemagic + zip support' \
     && apt-get install -y openssl \
     && apt-get install -y cron \
     && apt-get install -y libpng-dev \
     && apt-get install -y zlib1g-dev \
     && apt-get install -y libzip-dev \
-    && apt-get install -y unzip
-
-RUN \
-    apt-get update && apt-get install -y libmagickwand-dev --no-install-recommends \
+    && apt-get install -y unzip \
+    && apt-get update \
+    && apt-get install -y libmagickwand-dev --no-install-recommends \
     && pecl install imagick \
-	&& docker-php-ext-enable imagick
-
-RUN \
-    echo 'Adding font support' \
+	&& docker-php-ext-enable imagick \
+    && echo 'Adding font support' \
     && apt-get install -y libfreetype6-dev \
     && echo 'oniguruma?' \
     && apt-get install -y libonig-dev \
