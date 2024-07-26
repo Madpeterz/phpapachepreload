@@ -1,5 +1,5 @@
 FROM php:8.2-apache
-
+EXPOSE 80
 MAINTAINER Madpeter
 
 # Install necessary packages / Install PHP extensions which depend on external libraries
