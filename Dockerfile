@@ -22,14 +22,20 @@ RUN \
     && apt-get install -y libonig-dev \
     && apt-get install -y --no-install-recommends libssl-dev libcurl4-openssl-dev \
     && docker-php-ext-configure curl --with-curl \
-    && docker-php-ext-install -j$(nproc) \
-        curl \
-        mysqli \
-        calendar \
-        opcache \
-        zip \
-        mbstring \
-        gd \
+    && docker-php-ext-install curl \
+    && docker-php-ext-install mysqli \
+    && docker-php-ext-install calendar \
+    && docker-php-ext-install opcache \
+    && docker-php-ext-install zip \
+    && docker-php-ext-install mbstring \
+    && docker-php-ext-install gd \
+    && docker-php-ext-install curl \
+    && docker-php-ext-install mysqli \
+    && docker-php-ext-install calendar \
+    && docker-php-ext-install opcache \
+    && docker-php-ext-install zip \
+    && docker-php-ext-install mbstring \
+    && docker-php-ext-install gd \
     && a2enmod rewrite \ 
     && a2enmod expires \
     && apt-get update
