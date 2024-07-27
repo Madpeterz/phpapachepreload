@@ -1,4 +1,4 @@
-FROM 8.2-apache-bullseye
+FROM 8.2-apache
 EXPOSE 80
 MAINTAINER Madpeter
 
