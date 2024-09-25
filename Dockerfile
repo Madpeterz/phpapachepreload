@@ -38,7 +38,8 @@ RUN \
     && docker-php-ext-install gd \
     && a2enmod rewrite \ 
     && a2enmod expires \
-    && apt-get update
+    && apt-get update \
+    && apt-get clean
 
 # Setup Zend OP Cache
 RUN { \
