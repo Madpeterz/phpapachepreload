@@ -36,6 +36,7 @@ RUN \
     && docker-php-ext-install zip \
     && docker-php-ext-install mbstring \
     && docker-php-ext-install gd \
+    && docker-php-ext-configure gd --enable-gd --with-freetype --with-jpeg --with-webp \
     && a2enmod rewrite \ 
     && a2enmod expires \
     && apt-get update \
