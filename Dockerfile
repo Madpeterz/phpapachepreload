@@ -28,7 +28,6 @@ RUN \
     && docker-php-ext-install opcache \
     && docker-php-ext-install zip \
     && docker-php-ext-install mbstring \
-    && docker-php-ext-install gd \
     && docker-php-ext-install curl \
     && docker-php-ext-install mysqli \
     && docker-php-ext-install calendar \
@@ -41,7 +40,7 @@ RUN \
     && apt-get update \
     && apt-get clean
 
-RUN docker-php-ext-configure gd --enable-gd --with-freetype --with-jpeg --with-webp
+RUN docker-php-ext-configure gd --with-freetype --with-jpeg && docker-php-ext-install gd
 
 # Setup Zend OP Cache
 RUN { \
