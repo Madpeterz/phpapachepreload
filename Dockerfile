@@ -39,7 +39,8 @@ RUN \
     && apt-get update \
     && apt-get clean
 
-RUN docker-php-ext-configure gd --with-freetype --with-jpeg && docker-php-ext-install gd
+RUN docker-php-ext-configure gd --with-freetype --with-jpeg && docker-php-ext-install gd \
+    && apt-get clean
 
 # Setup Zend OP Cache
 RUN { \
