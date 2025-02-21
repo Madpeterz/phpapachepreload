@@ -39,8 +39,15 @@ RUN \
     && apt-get update \
     && apt-get clean
 
+RUN set -eux; \
+	apt-get update; \
+	apt-get install -y --no-install-recommends libffi-dev; \
+	rm -rf /var/lib/apt/lists/*; \
+	docker-php-ext-install ffi
+
 RUN docker-php-ext-configure gd --with-freetype --with-jpeg && docker-php-ext-install gd \
     && apt-get clean
+
 
 # Setup Zend OP Cache
 RUN { \
