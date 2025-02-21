@@ -1,19 +1,3 @@
-FROM mcr.microsoft.com/cbl-mariner/base/python:3
-MAINTAINER Changming Sun "chasun@microsoft.com"
-ADD . /code
-
-RUN tdnf install -y tar ca-certificates build-essential cmake curl python3-devel python3-setuptools python3-wheel python3-pip python3-numpy python3-flatbuffers python3-packaging python3-protobuf
-# The latest cmake version in Mariner2 is 3.21, but we need 3.26+
-RUN /code/dockerfiles/scripts/install_cmake.sh
-
-# Prepare onnxruntime repository & build onnxruntime
-RUN cd /code && /bin/bash ./build.sh --allow_running_as_root --skip_submodule_sync --config Release --build_wheel --update --build --parallel --cmake_extra_defines ONNXRUNTIME_VERSION=$(cat ./VERSION_NUMBER)
-
-FROM mcr.microsoft.com/cbl-mariner/base/python:3
-COPY --from=0 /code/build/Linux/Release/dist /root
-COPY --from=0 /code/dockerfiles/LICENSE-IMAGE.txt /code/LICENSE-IMAGE.txt
-RUN tdnf install -y ca-certificates python3-setuptools python3-wheel python3-pip python3-numpy python3-flatbuffers python3-packaging python3-protobuf python3-mpmath python3-sympy && python3 -m pip install coloredlogs humanfriendly && python3 -m pip install --no-index --find-links /root onnxruntime  && rm -rf /root/*.whl
-
 FROM php:8.2-apache-bullseye
 EXPOSE 80
 MAINTAINER Madpeter
@@ -63,6 +47,12 @@ RUN set -eux; \
 
 RUN docker-php-ext-configure gd --with-freetype --with-jpeg && docker-php-ext-install gd \
     && apt-get clean
+
+RUN apt update && apt install -y wget
+RUN wget https://raw.githubusercontent.com/php-opencv/php-opencv-packages/master/opencv_4.7.0_amd64.deb && dpkg -i opencv_4.7.0_amd64.deb && rm opencv_4.7.0_amd64.deb
+
+RUN sudo apt install libopencv-dev -y
+RUN apt-get clean
 
 
 # Setup Zend OP Cache
