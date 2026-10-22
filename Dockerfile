@@ -1,4 +1,4 @@
-FROM php:8.2-apache-bullseye
+FROM php:8.4.27-apache-bookworm
 EXPOSE 80
 MAINTAINER Madpeter
 
